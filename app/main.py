@@ -1,8 +1,14 @@
 from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.responses import RedirectResponse
 
 from app.predictor import predict
 
 app = FastAPI(title="Object Detector API")
+
+
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse("/docs")
 
 
 @app.post("/predict")
